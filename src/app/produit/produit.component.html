@@ -1,0 +1,71 @@
+<div *ngIf="produits" >
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <!-- First column content -->
+    </div>
+    <div class="col-md-4">
+      <!-- Second column content -->
+      <form (submit)="addProduit()">
+      <h2>Ajout d'un produit</h2>
+        <div class="form-group">
+            <label for="titre">Titre</label>
+            <!--bootstrap input-->
+            <input type="text" class="form-control" id="titre" name="titre" [(ngModel)]="produit.titre" required>
+            
+        </div>
+        <div class="form-group">
+            <label for="prix">Prix</label>
+            <!--bootstrap input-->
+            <input type="number" class="form-control" id="prix" name="prix" [(ngModel)]="produit.prix" required>
+            
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <!--bootstrap input-->
+            <textarea class="form-control" id="description" name="description" [(ngModel)]="produit.description" required>
+            </textarea>
+            </div>
+            <div class="form-group">
+                <label for="quantite">Quantite</label>
+                <!--bootstrap input-->
+                <input type="number" class="form-control" id="quantite" name="quantite" [(ngModel)]="produit.quantite" required>
+                
+            </div>
+        <button type="submit" class="btn btn-primary" >Ajouter</button>
+    </form>
+    </div>
+    <div class="col-md-4">
+      <!-- Third column content -->
+    </div>
+  </div>
+</div>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Prix</th>
+            <th>Description</th>
+            <th>Quantite</th>
+            <th>total</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let p of produits">
+            <td>{{p.titre}}</td>
+            <td>{{p.prix}}</td>
+            <td>{{p.description}}</td>
+            <td>{{p.quantite}}</td>
+            <td>{{p.prix *p.quantite}}</td>
+            <td>
+                <!-- lien vers l'url de update produits/:id depuis produits-->
+                <a [routerLink]="['/produits', p.id]" class="btn btn-primary">Modifier</a> &nbsp; &nbsp;
+                <button class="btn btn-danger" (click)="delete(p)">Supprimer</button>
+            </td>
+        </tr>
+    </tbody>
+
+
+</table>
+</div>
